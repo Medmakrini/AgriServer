@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-w7n8)g73h57m835ft@u=sn8rku$ajrfsuitx%-)3nr4msswh(l
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['gnoria.up.railway.app']
+ALLOWED_HOSTS = ['gnoria.up.railway.app','127.0.0.1']
 
 
 # Application definition
@@ -73,13 +74,15 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 CORS_ALLOWED_ORIGINS = [
-    'https://gnoria.up.railway.app'
+    'https://gnoria.up.railway.app',
+    'http://127.0.0.1:8000'
     ]
 
 
 CORS_ORIGIN_WHITELIST = [ 
     'https://gnoria.up.railway.app/',
-    'https://gnoria.up.railway.app/'
+    'https://gnoria.up.railway.app/',
+    'http://127.0.0.1:8000/'
 ]
 
 
@@ -154,30 +157,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+
+LOGIN_URL = '/admin/login/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
-CSRF_TRUSTED_ORIGINS = [ 'http://192.168.1.4:19000' ]
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-    "accept",
-    "accept-encoding",
-    "authorization",
-    "content-type",
-    "dnt",
-    "origin",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-]
-
 
 AUTH_USER_MODEL = 'users.ExtendUser'
 
@@ -196,6 +184,9 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 GRAPHQL_JWT = {
+    'JWT_ALLOW_ANY_HANDLER': 'graphql_jwt.middleware.allow_any',
+    'JWT_COOKIE_NAME': 'JWT',
+    'JWT_REFRESH_TOKEN_COOKIE_NAME': 'JWT-refresh-token',
     "JWT_ALLOW_ANY_CLASSES": [
         "graphql_auth.mutations.Register",
         "graphql_auth.mutations.VerifyAccount",
@@ -207,7 +198,6 @@ GRAPHQL_JWT = {
     "JWT_EXPIRATION_DELTA": timedelta(hours=12),
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
     "JWT_ALLOW_ARGUMENT": True,
-
 
 
 }
@@ -249,3 +239,5 @@ PASSWORD_HASHERS = [
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/'
