@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-w7n8)g73h57m835ft@u=sn8rku$ajrfsuitx%-)3nr4msswh(l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+
+ALLOWED_HOSTS = ['gnoria.up.railway.app']
 
 
 # Application definition
@@ -71,12 +72,17 @@ CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 
 
+CORS_ALLOWED_ORIGINS = [
+    'https://gnoria.up.railway.app',
+    'http://localhost:3000',
+    ]
+
+
 CORS_ORIGIN_WHITELIST = [ 
-    'http://192.168.1.4:8000',
-    'http://192.168.1.4:19000',
-    'http://localhost:19002',
-    'http://192.168.137:19000',
+    'https://gnoria.up.railway.app/',
 ]
+
+
 
 ROOT_URLCONF = 'viableways.urls'
 
