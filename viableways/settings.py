@@ -75,11 +75,13 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'https://gnoria.up.railway.app',
     'http://localhost:3000',
+    'https://gnoria.up.railway.app/'
     ]
 
 
 CORS_ORIGIN_WHITELIST = [ 
     'https://gnoria.up.railway.app/',
+    'https://gnoria.up.railway.app/'
 ]
 
 
