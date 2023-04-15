@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-w7n8)g73h57m835ft@u=sn8rku$ajrfsuitx%-)3nr4msswh(l
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['gnoria.up.railway.app','127.0.0.1']
+ALLOWED_HOSTS = ['agriserver.up.railway.app','127.0.0.1']
 
 
 # Application definition
@@ -74,14 +74,14 @@ CORS_ALLOW_CREDENTIALS = True
 
 
 CORS_ALLOWED_ORIGINS = [
-    'https://gnoria.up.railway.app',
+    'https://agriserver.up.railway.app',
     'http://127.0.0.1:8000'
     ]
 
 
 CORS_ORIGIN_WHITELIST = [ 
-    'https://gnoria.up.railway.app/',
-    'https://gnoria.up.railway.app/',
+    'https://agriserver.up.railway.app/',
+    'https://agriserver.up.railway.app/',
     'http://127.0.0.1:8000/'
 ]
 
