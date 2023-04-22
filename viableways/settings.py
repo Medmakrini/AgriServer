@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'farm',
-    'todoapp',
     'machine',
     'worker',
     'corsheaders',
@@ -52,6 +51,7 @@ INSTALLED_APPS = [
     'graphql_jwt.refresh_token.apps.RefreshTokenConfig',
     'graphql_auth',
     'django_filters',
+    'todoapp'
 ]
 
 MIDDLEWARE = [
@@ -116,9 +116,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'zKYM8nLOwiEOhwXmP9AY',
-        'HOST': 'containers-us-west-10.railway.app',
-        'PORT': '5797',
+        'PASSWORD': '11HL0FR1CA1n8FkU9iqV',
+        'HOST': 'containers-us-west-133.railway.app',
+        'PORT': '6254',
     }
 }
 
