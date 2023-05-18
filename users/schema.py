@@ -129,11 +129,12 @@ class IsUserExist(graphene.Mutation):
         phone = graphene.String()
 
     def mutate(cls, info, phone):
-        obj = ExtendUser.objects.get(phone=phone)
-        if(obj):
+        try:
+            obj = ExtendUser.objects.get(phone=phone)
             return IsUserExist(ok=True)
-        else:
-            return IsUserExist(ok=False)
+        except:
+            raise Exception("This phone number already used")
+
 
 
 class BlockUser(graphene.Mutation):
