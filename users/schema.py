@@ -5,7 +5,7 @@ from graphql_auth.schema import UserQuery, MeQuery
 import graphql_jwt
 
 from django.contrib.auth.hashers import make_password
-
+from django.core.exceptions import ObjectDoesNotExist
 from farm.models import Farm as FarmModel
 from worker.models import Worker as WorkerModel
 from machine.models import Machine as MachineModel
@@ -128,13 +128,14 @@ class IsUserExist(graphene.Mutation):
     class Arguments:
         phone = graphene.String()
 
+    @classmethod
     def mutate(cls, info, phone):
-        try:
-            obj = ExtendUser.objects.get(phone=phone)
+        user_exists = ExtendUser.objects.filter(phone=phone).exists()
+        if user_exists:
             return IsUserExist(ok=True)
-        except:
-            raise Exception("This phone number already used")
-
+        else:
+            return IsUserExist(ok=False)
+ 
 
 
 class BlockUser(graphene.Mutation):
