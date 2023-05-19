@@ -128,7 +128,6 @@ class IsUserExist(graphene.Mutation):
     class Arguments:
         phone = graphene.String()
 
-    @classmethod
     def mutate(cls, info, phone):
         user_exists = ExtendUser.objects.filter(phone=phone).exists()
         if user_exists:
