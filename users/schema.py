@@ -97,7 +97,6 @@ class VerifyAuth(graphene.Mutation):
 
     class Arguments:
         phone = graphene.String()
-
     def mutate(cls, info, phone):
         obj = ExtendUser.objects.get(phone=phone)
         obj.status.verified=True
@@ -177,7 +176,25 @@ class Query(UserQuery, MeQuery, graphene.ObjectType):
     presences =graphene.List(PresenceType)
     location =graphene.List(LocationType)
     todoapp=graphene.List(TodoType)
+    UserFarms=graphene.List(FarmType,id=graphene.String())
+    UserTodos=graphene.List(TodoType,id=graphene.String())
 
+    def resolve_UserFarms(self, info,id=None, **kwargs):
+        try:
+            owner=ExtendUser.objects.get(pk=id)
+            farms=FarmModel.objects.filter(owner=owner)
+            return farms
+        except:
+            raise Exception("no user provided")
+        
+    def resolve_UserTodos(self, info,id=None, **kwargs):
+            try:
+                owner=ExtendUser.objects.get(pk=id)
+                todos=TodoListModel.objects.filter(user=owner)
+                return todos
+            except:
+                raise Exception("no user provided")
+        
     def resolve_farms(self,info):
         return FarmModel.objects.all()
 
